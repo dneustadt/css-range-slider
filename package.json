@@ -8,12 +8,12 @@
   "main": "dist/range-slider.min.css",
   "keywords": [
     "css",
-    "menu",
-    "flyout",
-    "offcanvas",
+    "range",
+    "slider",
+    "radio",
     "pure-css",
-    "sticky",
-    "hamburger-menu"
+    "responsive",
+    "ui"
   ],
   "scripts": {
     "start": "gulp watch",
