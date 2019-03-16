@@ -13,9 +13,7 @@ var sassConfig = {
     }
 };
 
-gulp.task('default', ['build-css', 'build-scripts']);
-
-gulp.task('build-css', function() {
+var buildCss = function() {
     return gulp
         .src(sassConfig.inputDirectory)
         .pipe(sass(sassConfig.options).on('error', sass.logError))
@@ -23,14 +21,14 @@ gulp.task('build-css', function() {
         .pipe(rename({ suffix: '.min' }))
         .pipe(csso())
         .pipe(gulp.dest(sassConfig.outputDirectory));
-});
+};
 
 var jsFiles = [
         'src/range-slider-events.js'
     ],
     jsDest = 'dist';
 
-gulp.task('build-scripts', function() {
+var buildScripts = function() {
     return gulp
         .src(jsFiles)
         .pipe(concat('range-slider-events.js'))
@@ -38,8 +36,10 @@ gulp.task('build-scripts', function() {
         .pipe(rename('range-slider-events.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(jsDest));
-});
+};
+
+gulp.task('default', gulp.series(gulp.parallel(buildCss, buildScripts)));
 
 gulp.task('watch', function() {
-    gulp.watch('css/src/*.scss', ['build-css', 'build-scripts']);
+    gulp.watch('css/src/*.scss', gulp.series(gulp.parallel(buildCss, buildScripts)));
 });
