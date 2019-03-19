@@ -57,6 +57,7 @@ $light-grey: #eee !default;
           margin-top: -20px;
           padding-top: 20px;
           cursor: pointer;
+          -webkit-tap-highlight-color: transparent;
           &:before {
             display: block;
             content: '';
